@@ -6,8 +6,8 @@ import { motion } from "framer-motion";
 const Hero = () => {
   return (
     <div className="relative">
-      <div className="bg-navy bg-opacity-95 text-white min-h-[85vh] flex items-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/30 to-navy/90 z-0"></div>
+      <div className="bg-navy bg-opacity-80 min-h-[85vh] flex items-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-navy/10 to-navy/80 z-0"></div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -18,12 +18,12 @@ const Hero = () => {
               className="text-left"
             >
               <motion.div 
-                className="inline-block bg-navy-light/20 backdrop-blur-sm py-2 px-4 rounded-full mb-6"
+                className="inline-block bg-white/20 backdrop-blur-sm py-2 px-4 rounded-full mb-6 border border-white/30"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
               >
-                <span className="text-sm font-medium">RNSIT Model United Nations</span>
+                <span className="text-sm font-semibold text-white">RNSIT Model United Nations</span>
               </motion.div>
               
               <motion.h1 
@@ -32,12 +32,12 @@ const Hero = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8 }}
               >
-                <span className="text-gradient">Modal United</span> <br />
-                <span>Society</span>
+                <span className="text-white drop-shadow-lg">Model United</span> <br />
+                <span className="text-gradient font-extrabold">Society</span>
               </motion.h1>
               
               <motion.p 
-                className="text-xl md:text-2xl mb-8 text-gray-200 max-w-xl"
+                className="text-xl md:text-2xl mb-8 text-white font-medium max-w-xl drop-shadow-md"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
@@ -52,7 +52,7 @@ const Hero = () => {
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
                 <Link to="/events" className="relative group overflow-hidden">
-                  <span className="relative z-10 bg-navy-light text-white font-medium py-3 px-8 rounded-full flex items-center transition-all duration-300 group-hover:bg-white group-hover:text-navy">
+                  <span className="relative z-10 bg-white text-navy font-bold py-3 px-8 rounded-full flex items-center transition-all duration-300 group-hover:bg-navy-light group-hover:text-white shadow-lg">
                     Explore Events
                     <svg className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -61,7 +61,7 @@ const Hero = () => {
                 </Link>
                 
                 <Link to="/contact" className="relative group overflow-hidden">
-                  <span className="relative z-10 border-2 border-white text-white font-medium py-3 px-8 rounded-full flex items-center transition-all duration-300 group-hover:bg-white group-hover:text-navy">
+                  <span className="relative z-10 border-2 border-white bg-transparent text-white font-bold py-3 px-8 rounded-full flex items-center transition-all duration-300 group-hover:bg-white group-hover:text-navy shadow-lg">
                     Get Involved
                   </span>
                 </Link>
@@ -75,8 +75,8 @@ const Hero = () => {
               transition={{ duration: 1, delay: 0.3 }}
             >
               <div className="relative w-96 h-96">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-navy-light/30 to-navy-light/10 backdrop-blur-sm border border-white/10 animate-pulse-slow"></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] rounded-full bg-navy border border-white/20 flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-white/30 to-navy-light/30 backdrop-blur-sm border border-white/30 animate-pulse-slow"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] rounded-full bg-navy/70 border border-white/40 flex items-center justify-center overflow-hidden shadow-2xl">
                   <img 
                     src="/lovable-uploads/e94f3eee-c30a-479a-a870-66c5f3bd47cf.png" 
                     alt="RNSIT MUN Logo" 
