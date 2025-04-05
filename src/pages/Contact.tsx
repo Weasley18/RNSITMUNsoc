@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Mail, Phone, MapPin, Users, Calendar } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,90 +5,156 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const Contact = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        type: "spring", 
+        stiffness: 100 
+      } 
+    }
+  };
+
   return (
-    <div className="py-16 px-4 sm:px-6 lg:px-8">
+    <motion.div 
+      className="py-16 px-4 sm:px-6 lg:px-8"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container mx-auto">
-        <h1 className="text-4xl font-bold text-navy mb-8 text-center">Contact Us</h1>
-        <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center mb-12">
+        <motion.h1 
+          className="text-4xl font-bold text-white mb-6 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          Contact Us
+        </motion.h1>
+        
+        <motion.p 
+          className="text-xl text-white/80 mb-16 text-center max-w-3xl mx-auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+        >
           Have questions about our events or how to get involved? We'd love to hear from you. Reach out to the Modal United Society through any of the methods below.
-        </p>
+        </motion.p>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <div>
-            <h2 className="text-2xl font-bold text-navy mb-6">Send Us a Message</h2>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Your Name</Label>
-                  <Input id="name" placeholder="Full Name" />
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            <h2 className="text-2xl font-bold text-white mb-6">Send Us a Message</h2>
+            <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 backdrop-blur-lg rounded-2xl p-8 border border-indigo-500/20 shadow-lg">
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="text-white">Your Name</Label>
+                    <Input id="name" placeholder="Full Name" className="bg-white/10 border-white/20 text-white placeholder:text-white/50" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-white">Email Address</Label>
+                    <Input id="email" type="email" placeholder="you@example.com" className="bg-white/10 border-white/20 text-white placeholder:text-white/50" />
+                  </div>
                 </div>
+                
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
-                  <Input id="email" type="email" placeholder="you@example.com" />
+                  <Label htmlFor="subject" className="text-white">Subject</Label>
+                  <Input id="subject" placeholder="What is this regarding?" className="bg-white/10 border-white/20 text-white placeholder:text-white/50" />
                 </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="subject">Subject</Label>
-                <Input id="subject" placeholder="What is this regarding?" />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
-                <Textarea 
-                  id="message" 
-                  placeholder="How can we help you?" 
-                  className="min-h-32"
-                />
-              </div>
-              
-              <Button type="submit" className="bg-navy hover:bg-navy-dark">
-                Send Message
-              </Button>
-            </form>
-          </div>
-          
-          <div>
-            <h2 className="text-2xl font-bold text-navy mb-6">Contact Information</h2>
-            <div className="space-y-6">
-              <ContactCard 
-                icon={<MapPin className="h-6 w-6 text-navy" />}
-                title="Visit Us"
-                content={<p>R.N. Shetty Institute of Technology<br />Channasandra, Bengaluru<br />Karnataka, India - 560098</p>}
-              />
-              
-              <ContactCard 
-                icon={<Phone className="h-6 w-6 text-navy" />}
-                title="Call Us"
-                content={<p>+91 1234567890<br />+91 9876543210</p>}
-              />
-              
-              <ContactCard 
-                icon={<Mail className="h-6 w-6 text-navy" />}
-                title="Email Us"
-                content={<p>info@rnsitmun.org<br />president@rnsitmun.org<br />secretary@rnsitmun.org</p>}
-              />
-              
-              <ContactCard 
-                icon={<Users className="h-6 w-6 text-navy" />}
-                title="Join Us"
-                content={<p>We welcome new members throughout the academic year. Fill out our membership form to join our society.</p>}
-              />
-              
-              <ContactCard 
-                icon={<Calendar className="h-6 w-6 text-navy" />}
-                title="Meeting Times"
-                content={<p>General Body Meetings:<br />Every Saturday, 2:00 PM - 4:00 PM<br />Committee Room, Main Building</p>}
-              />
+                
+                <div className="space-y-2">
+                  <Label htmlFor="message" className="text-white">Message</Label>
+                  <Textarea 
+                    id="message" 
+                    placeholder="How can we help you?" 
+                    className="min-h-32 bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                  />
+                </div>
+                
+                <Button type="submit" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-none shadow-md">
+                  Send Message
+                </Button>
+              </form>
             </div>
-          </div>
+          </motion.div>
+          
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
+            <div className="space-y-4">
+              <motion.div variants={itemVariants}>
+                <ContactCard 
+                  icon={<MapPin className="h-6 w-6 text-cyan-400" />}
+                  title="Visit Us"
+                  content={<p>R.N. Shetty Institute of Technology<br />Channasandra, Bengaluru<br />Karnataka, India - 560098</p>}
+                />
+              </motion.div>
+              
+              <motion.div variants={itemVariants}>
+                <ContactCard 
+                  icon={<Phone className="h-6 w-6 text-cyan-400" />}
+                  title="Call Us"
+                  content={<p>+91 1234567890<br />+91 9876543210</p>}
+                />
+              </motion.div>
+              
+              <motion.div variants={itemVariants}>
+                <ContactCard 
+                  icon={<Mail className="h-6 w-6 text-cyan-400" />}
+                  title="Email Us"
+                  content={<p>info@rnsitmun.org<br />president@rnsitmun.org<br />secretary@rnsitmun.org</p>}
+                />
+              </motion.div>
+              
+              <motion.div variants={itemVariants}>
+                <ContactCard 
+                  icon={<Users className="h-6 w-6 text-cyan-400" />}
+                  title="Join Us"
+                  content={<p>We welcome new members throughout the academic year. Fill out our membership form to join our society.</p>}
+                />
+              </motion.div>
+              
+              <motion.div variants={itemVariants}>
+                <ContactCard 
+                  icon={<Calendar className="h-6 w-6 text-cyan-400" />}
+                  title="Meeting Times"
+                  content={<p>General Body Meetings:<br />Every Saturday, 2:00 PM - 4:00 PM<br />Committee Room, Main Building</p>}
+                />
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
         
-        <div className="bg-gray-50 rounded-lg p-8 text-center">
-          <h2 className="text-2xl font-bold text-navy mb-4">Follow Us</h2>
-          <p className="text-gray-700 mb-6">
+        <motion.div 
+          className="bg-gradient-to-r from-blue-900/30 to-indigo-900/30 backdrop-blur-lg rounded-2xl p-8 border border-indigo-500/20 shadow-lg text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+        >
+          <h2 className="text-2xl font-bold text-white mb-4">Follow Us</h2>
+          <p className="text-white/80 mb-6">
             Stay updated with our latest events and activities by following us on social media.
           </p>
           <div className="flex justify-center space-x-6">
@@ -98,9 +163,9 @@ const Contact = () => {
             <SocialLink type="instagram" />
             <SocialLink type="linkedin" />
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -114,21 +179,19 @@ const ContactCard = ({
   content: React.ReactNode 
 }) => {
   return (
-    <Card>
-      <CardContent className="p-6">
-        <div className="flex items-start">
-          <div className="mr-4 mt-1">
-            {icon}
-          </div>
-          <div>
-            <h3 className="font-bold text-lg mb-2">{title}</h3>
-            <div className="text-gray-700">
-              {content}
-            </div>
+    <div className="bg-gradient-to-r from-blue-900/40 to-indigo-900/40 backdrop-blur-lg rounded-2xl p-6 border border-white/10 shadow-lg hover:shadow-xl transition-all duration-300">
+      <div className="flex items-start">
+        <div className="mr-4 mt-1">
+          {icon}
+        </div>
+        <div>
+          <h3 className="font-bold text-lg mb-2 text-white">{title}</h3>
+          <div className="text-white/80">
+            {content}
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 
@@ -171,7 +234,7 @@ const SocialLink = ({ type }: { type: string }) => {
   return (
     <a 
       href="#" 
-      className="text-gray-600 hover:text-navy transition-colors duration-300"
+      className="text-white/70 hover:text-cyan-400 transition-colors duration-300"
       aria-label={`${type} link`}
     >
       {icon}

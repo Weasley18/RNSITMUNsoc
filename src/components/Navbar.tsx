@@ -1,12 +1,12 @@
-
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { NavLink, Link } from "react-router-dom";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [teamDropdownOpen, setTeamDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +25,7 @@ const Navbar = () => {
   }, []);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleTeamDropdown = () => setTeamDropdownOpen(!teamDropdownOpen);
 
   const navVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -41,6 +42,28 @@ const Navbar = () => {
   const itemVariants = {
     hidden: { opacity: 0, y: -10 },
     visible: { opacity: 1, y: 0 }
+  };
+
+  const dropdownVariants = {
+    hidden: { opacity: 0, y: -5, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: {
+        duration: 0.2,
+        ease: "easeOut"
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: -5,
+      scale: 0.95,
+      transition: {
+        duration: 0.15,
+        ease: "easeIn"
+      }
+    }
   };
 
   return (
@@ -92,13 +115,55 @@ const Navbar = () => {
               </motion.div>
               <motion.div variants={itemVariants}>
                 <NavLink 
-                  to="/team" 
+                  to="/committees" 
                   className={({isActive}) => 
                     isActive ? "navbar-item active-nav-item" : "navbar-item"
                   }
                 >
-                  Team
+                  Our Committees
                 </NavLink>
+              </motion.div>
+              <motion.div 
+                variants={itemVariants} 
+                className="relative"
+                onMouseEnter={() => setTeamDropdownOpen(true)}
+                onMouseLeave={() => setTeamDropdownOpen(false)}
+              >
+                <button 
+                  className="navbar-item flex items-center"
+                  onClick={() => setTeamDropdownOpen(!teamDropdownOpen)}
+                >
+                  <span>Our Team</span>
+                  <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${teamDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {teamDropdownOpen && (
+                    <motion.div 
+                      className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-gradient-to-r from-blue-900/90 to-purple-900/90 backdrop-blur-md border border-indigo-500/30 overflow-hidden z-50"
+                      variants={dropdownVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                    >
+                      <div className="py-1">
+                        <Link 
+                          to="/team/core" 
+                          className="block px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors duration-200"
+                          onClick={() => setTeamDropdownOpen(false)}
+                        >
+                          Core Committee
+                        </Link>
+                        <Link 
+                          to="/team/delegation" 
+                          className="block px-4 py-2 text-sm text-white hover:bg-white/10 transition-colors duration-200"
+                          onClick={() => setTeamDropdownOpen(false)}
+                        >
+                          Delegation Team
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
               <motion.div variants={itemVariants}>
                 <NavLink 
@@ -172,7 +237,7 @@ const Navbar = () => {
                 Events
               </NavLink>
               <NavLink
-                to="/team"
+                to="/committees"
                 className={({isActive}) => 
                   `block px-3 py-2 rounded-md text-base font-medium ${
                     isActive ? "text-navy-light bg-navy-dark" : "text-white hover:text-navy-light hover:bg-navy-dark"
@@ -180,8 +245,43 @@ const Navbar = () => {
                 }
                 onClick={toggleMenu}
               >
-                Team
+                Our Committees
               </NavLink>
+              <div className="relative py-1">
+                <button
+                  onClick={() => setTeamDropdownOpen(!teamDropdownOpen)}
+                  className="w-full flex items-center justify-between px-3 py-2 rounded-md text-base font-medium text-white hover:text-navy-light hover:bg-navy-dark"
+                >
+                  Our Team
+                  <ChevronDown className={`ml-2 h-4 w-4 transition-transform duration-200 ${teamDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {teamDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="pl-4"
+                    >
+                      <Link
+                        to="/team/core"
+                        className="block px-3 py-2 rounded-md text-sm text-white hover:text-navy-light"
+                        onClick={toggleMenu}
+                      >
+                        Core Committee
+                      </Link>
+                      <Link
+                        to="/team/delegation"
+                        className="block px-3 py-2 rounded-md text-sm text-white hover:text-navy-light"
+                        onClick={toggleMenu}
+                      >
+                        Delegation Team
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
               <NavLink
                 to="/prepare"
                 className={({isActive}) => 

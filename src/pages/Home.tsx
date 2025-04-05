@@ -1,4 +1,3 @@
-
 import React from "react";
 import Hero from "@/components/Hero";
 import { Award, Target, Users, Globe, TrendingUp, ShieldCheck } from "lucide-react";
@@ -62,10 +61,9 @@ const Home = () => {
                   className="prose max-w-none"
                 >
                   <p className="text-white text-lg leading-relaxed font-medium drop-shadow-md">
-                    The Model United Society at R.N. Shetty Institute of Technology is dedicated to promoting diplomacy, 
-                    international relations, and the United Nations among students. Founded with the vision to create a 
-                    platform for students to engage in diplomatic simulations, our society has grown to become one of the 
-                    most active and successful MUN clubs in the region.
+                    The Model United Nations Society at RNSIT was established in 2024 with the vision to create future diplomats, 
+                    leaders and changemakers. Our society aims to provide students with a platform to engage in meaningful dialogue 
+                    on global issues, enhance their public speaking abilities, and develop critical diplomatic skills.
                   </p>
                 </motion.div>
                 
@@ -77,10 +75,10 @@ const Home = () => {
                   className="prose max-w-none"
                 >
                   <p className="text-white text-lg leading-relaxed font-medium drop-shadow-md">
-                    Through our Model United Nations conferences, we provide students with an opportunity to step into the 
-                    shoes of diplomats and engage in debates, negotiations, and resolution drafting on pressing global issues. 
-                    Our members develop critical skills in public speaking, research, policy analysis, and conflict resolution 
-                    that are valuable in both academic and professional settings.
+                    Over the years, we have grown from a small group of enthusiastic students to one of the most recognized 
+                    MUN societies in the region. We organize regular training sessions, workshops, and conferences that help 
+                    students understand complex global issues while learning the art of negotiation, resolution drafting, 
+                    and consensus building.
                   </p>
                 </motion.div>
                 
@@ -92,9 +90,9 @@ const Home = () => {
                   className="prose max-w-none"
                 >
                   <p className="text-white text-lg leading-relaxed font-medium drop-shadow-md">
-                    Beyond conferences, we organize workshops, seminars, and training sessions throughout the academic year 
-                    to help students prepare for MUNs and enhance their understanding of international affairs. Our alumni 
-                    have gone on to pursue successful careers in diplomacy, international organizations, and various other fields.
+                    Our members have represented RNSIT at numerous national and international MUN conferences, bringing home 
+                    accolades and recognition. We take pride in our diverse community that welcomes students from all backgrounds 
+                    and disciplines, united by a shared passion for international relations and diplomacy.
                   </p>
                 </motion.div>
               </div>
