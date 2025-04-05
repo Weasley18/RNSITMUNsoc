@@ -18,7 +18,7 @@ const ThreeDBackground = () => {
       0.1,
       1000
     );
-    camera.position.z = 5;
+    camera.position.z = 8; // Moved camera back to show more of the globe
     
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -28,8 +28,8 @@ const ThreeDBackground = () => {
     mountRef.current.appendChild(renderer.domElement);
     
     // Create globe-like structure with particles
-    const globeRadius = 2;
-    const particlesCount = 2000;
+    const globeRadius = 3.5; // Increased size of the globe
+    const particlesCount = 2500; // More particles for better visibility
     const particlesGeometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particlesCount * 3);
     
@@ -52,7 +52,7 @@ const ThreeDBackground = () => {
     // Lines connecting points to simulate connections
     const connectionsGeometry = new THREE.BufferGeometry();
     const connectionsPositions = [];
-    const connectionsCount = 150; // Number of connections
+    const connectionsCount = 250; // More connections for better visibility
     
     for (let i = 0; i < connectionsCount; i++) {
       // Select two random points
@@ -77,17 +77,17 @@ const ThreeDBackground = () => {
     
     // Materials
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.05,
+      size: 0.08, // Larger point size for better visibility
       color: 0x8DA9C4,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.9, // Higher opacity for better visibility
       blending: THREE.AdditiveBlending
     });
     
     const connectionsMaterial = new THREE.LineBasicMaterial({
       color: 0x8DA9C4,
       transparent: true,
-      opacity: 0.3,
+      opacity: 0.4, // Higher opacity for better visibility
       blending: THREE.AdditiveBlending
     });
     
@@ -111,8 +111,8 @@ const ThreeDBackground = () => {
     const animate = () => {
       requestAnimationFrame(animate);
       
-      particlesMesh.rotation.y += 0.001;
-      connectionsMesh.rotation.y += 0.001;
+      particlesMesh.rotation.y += 0.002; // Slightly faster rotation
+      connectionsMesh.rotation.y += 0.002;
       
       renderer.render(scene, camera);
     };
