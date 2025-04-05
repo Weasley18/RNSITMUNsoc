@@ -7,10 +7,10 @@ import ThreeDBackground from "./ThreeDBackground";
 
 const Layout = () => {
   return (
-    <div className="flex flex-col min-h-screen relative">
+    <div className="flex flex-col min-h-screen relative overflow-hidden">
       <ThreeDBackground />
       <Navbar />
-      <main className="flex-grow">
+      <main className="flex-grow relative z-10">
         <Outlet />
       </main>
       <Footer />
