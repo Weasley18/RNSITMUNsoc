@@ -1,44 +1,105 @@
 
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { motion } from "framer-motion";
 
 const Team = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        type: "spring", 
+        stiffness: 100 
+      } 
+    }
+  };
+
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto">
-        <h1 className="text-4xl font-bold text-navy mb-12 text-center">Our Team</h1>
+        <motion.h1 
+          className="text-4xl font-bold text-navy mb-12 text-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          Our Team
+        </motion.h1>
         
         <Tabs defaultValue="core" className="w-full">
-          <div className="flex justify-center mb-8">
+          <motion.div 
+            className="flex justify-center mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
             <TabsList className="grid w-full max-w-md grid-cols-2">
               <TabsTrigger value="core" className="text-sm sm:text-base">Core Committee</TabsTrigger>
               <TabsTrigger value="delegation" className="text-sm sm:text-base">Delegation Team</TabsTrigger>
             </TabsList>
-          </div>
+          </motion.div>
           
           <TabsContent value="core">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-12">
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-12"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
               {Array.from({ length: 20 }).map((_, index) => (
-                <MemberCard 
-                  key={`core-${index}`} 
-                  name={`Core Member ${index + 1}`}
-                  position={getRandomPosition(true)}
-                />
+                <motion.div 
+                  key={`core-${index}`}
+                  variants={itemVariants}
+                  whileHover={{ 
+                    scale: 1.05,
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  <MemberCard 
+                    name={`Core Member ${index + 1}`}
+                    position={getRandomPosition(true)}
+                  />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </TabsContent>
           
           <TabsContent value="delegation">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 gap-y-12">
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 gap-y-12"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
               {Array.from({ length: 25 }).map((_, index) => (
-                <MemberCard 
-                  key={`delegation-${index}`} 
-                  name={`Delegate ${index + 1}`}
-                  position={getRandomPosition(false)}
-                  compact={true}
-                />
+                <motion.div 
+                  key={`delegation-${index}`}
+                  variants={itemVariants}
+                  whileHover={{ 
+                    scale: 1.05,
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  <MemberCard 
+                    name={`Delegate ${index + 1}`}
+                    position={getRandomPosition(false)}
+                    compact={true}
+                  />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </TabsContent>
         </Tabs>
       </div>
@@ -82,26 +143,55 @@ const MemberCard = ({
 }) => {
   return (
     <div className="flex flex-col items-center">
-      <div className="relative mb-4">
-        <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gray-200 overflow-hidden">
+      <motion.div 
+        className="relative mb-4"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gray-200 overflow-hidden shadow-md transform transition-all duration-300 hover:shadow-xl">
           <img 
             src={`https://i.pravatar.cc/300?img=${Math.floor(Math.random() * 70)}`} 
             alt={name} 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
           />
         </div>
-        <div className="absolute bottom-0 right-0 bg-navy rounded-full p-1">
+        <motion.div 
+          className="absolute bottom-0 right-0 bg-navy rounded-full p-1"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.2, type: "spring", stiffness: 500 }}
+        >
           <div className="w-3 h-3 rounded-full bg-green-500"></div>
-        </div>
-      </div>
-      <h3 className="font-bold text-navy text-center">{name}</h3>
-      <p className="text-sm text-gray-600 text-center">{position}</p>
+        </motion.div>
+      </motion.div>
+      <motion.h3 
+        className="font-bold text-navy text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        {name}
+      </motion.h3>
+      <motion.p 
+        className="text-sm text-gray-600 text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        {position}
+      </motion.p>
       {!compact && (
-        <div className="flex justify-center mt-2 space-x-2">
+        <motion.div 
+          className="flex justify-center mt-2 space-x-2"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
           <SocialIcon type="linkedin" />
           <SocialIcon type="twitter" />
           <SocialIcon type="mail" />
-        </div>
+        </motion.div>
       )}
     </div>
   );
